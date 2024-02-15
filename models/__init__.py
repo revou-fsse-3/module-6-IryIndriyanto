@@ -1,1 +1,1 @@
-from animal import AnimalModel
+from models.animal import AnimalModel
