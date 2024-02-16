@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from flask_smorest import Api
 
 from resources.animal import blp as animal_blueprint
+from resources.employee import blp as employee_blueprint
 from db import db
 
 
@@ -21,7 +22,6 @@ def create_app():
         "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
     )
 
-    # DATABASE_URL = os.getenv("DATABASE_URL").replace("")
     app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
         "DATABASE_URL", "sqlite:///data.db"
     )
@@ -33,5 +33,6 @@ def create_app():
     api = Api(app)
 
     api.register_blueprint(animal_blueprint)
+    api.register_blueprint(employee_blueprint)
 
     return app
