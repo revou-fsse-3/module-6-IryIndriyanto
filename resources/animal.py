@@ -52,7 +52,6 @@ class Animal(MethodView):
         except KeyError:
             abort(404, "animal not found")
 
-    @blp.response(200, AnimalSchema)
     def delete(self, animal_id):
         try:
             animal = AnimalModel.query.get(animal_id)

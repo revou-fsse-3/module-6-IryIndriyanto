@@ -52,7 +52,6 @@ class Employee(MethodView):
         except KeyError:
             abort(404, "employee not found")
 
-    @blp.response(200, EmployeeSchema)
     def delete(self, employee_id):
         try:
             employee = EmployeeModel.query.get(employee_id)
