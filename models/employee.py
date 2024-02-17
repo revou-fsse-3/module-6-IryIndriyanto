@@ -1,7 +1,7 @@
 from db import db
 
 class EmployeeModel(db.Model):
-    __tablename__ = "employees"
+    __tablename__ = "employee"
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), nullable=False)

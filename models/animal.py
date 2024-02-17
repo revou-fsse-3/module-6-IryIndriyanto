@@ -1,7 +1,7 @@
 from db import db
 
 class AnimalModel(db.Model):
-    __tablename__ = "animals"
+    __tablename__ = "animal"
 
     id = db.Column(db.Integer, primary_key=True)
     species = db.Column(db.String(80), nullable=False)
