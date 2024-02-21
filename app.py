@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from flask_smorest import Api
 
 from resources.animal import blp as animal_blueprint
+from resources.animal_v2 import blp as animal_v2_blueprint
 from resources.employee import blp as employee_blueprint
 from db import db
 
@@ -33,6 +34,7 @@ def create_app():
     api = Api(app)
 
     api.register_blueprint(animal_blueprint)
+    api.register_blueprint(animal_v2_blueprint)
     api.register_blueprint(employee_blueprint)
 
     return app
