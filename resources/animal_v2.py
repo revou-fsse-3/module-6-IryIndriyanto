@@ -18,7 +18,7 @@ def get_animals():
 @blp.route("/<int:animal_id>")
 @blp.response(200, AnimalSchema)
 def get_animal(animal_id):
-    animal = AnimalModel_v2.query.get(animal_id)
+    animal = db.session.get(AnimalModel_v2, animal_id)
     if animal is None:
         abort(404, "Animal not found")
     return animal
@@ -45,7 +45,7 @@ def create_animal(animal_data):
 @blp.arguments(AnimalSchema)
 @blp.response(200, AnimalSchema)
 def update_animal(animal_data, animal_id):
-    animal = AnimalModel_v2.query.get(animal_id)
+    animal = db.session.get(AnimalModel_v2, animal_id)
     if animal is None:
         abort(404, "Animal not found")
     AnimalModel_v2.query.filter_by(id=animal_id).update(animal_data)
@@ -56,11 +56,9 @@ def update_animal(animal_data, animal_id):
 @blp.route("/<int:animal_id>", methods=["DELETE"])
 @blp.response(200)
 def delete_animal(animal_id):
-    animal = AnimalModel_v2.query.get(animal_id)
+    animal = db.session.get(AnimalModel_v2, animal_id)
     if animal is None:
         abort(404, "Animal not found")
     db.session.delete(animal)
     db.session.commit()
     return {"message": "Animal deleted"}
-
-
