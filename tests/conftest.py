@@ -1,20 +1,24 @@
 import pytest
+from app import create_app
 from flask import Flask
 from resources.animal_v2 import blp
-from db import db  # Import SQLAlchemy instance
+from db import db
+
 
 @pytest.fixture
 def app():
-    app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'  # Use in-memory SQLite for tests
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    app.register_blueprint(blp)
-    db.init_app(app)
+    app = create_app(is_test_active=True)
+    app.config.update(
+        {
+            "TESTING": True,
+        }
+    )
+
+    yield app
 
     with app.app_context():
-        db.create_all()  # Create database tables
+        db.drop_all()
 
-    return app
 
 @pytest.fixture
 def client(app):

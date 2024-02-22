@@ -9,7 +9,7 @@ from resources.employee import blp as employee_blueprint
 from db import db
 
 
-def create_app():
+def create_app(is_test_active=False):
     app = Flask(__name__)
     load_dotenv()
 
@@ -23,9 +23,12 @@ def create_app():
         "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
     )
 
-    app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
-        "DATABASE_URL", "sqlite:///data.db"
-    )
+    if is_test_active:
+        app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
+    else:
+        app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
+            "DATABASE_URL", "sqlite:///data.db"
+        )
 
     db.init_app(app)
     with app.app_context():
