@@ -6,6 +6,7 @@ from flask_smorest import Api
 from resources.animal import blp as animal_blueprint
 from resources.animal_v2 import blp as animal_v2_blueprint
 from resources.employee import blp as employee_blueprint
+from resources.employee_v2 import blp as employee_v2_blueprint
 from db import db
 
 
@@ -39,5 +40,6 @@ def create_app(is_test_active=False):
     api.register_blueprint(animal_blueprint)
     api.register_blueprint(animal_v2_blueprint)
     api.register_blueprint(employee_blueprint)
+    api.register_blueprint(employee_v2_blueprint)
 
     return app
