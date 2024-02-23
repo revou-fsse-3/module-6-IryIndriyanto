@@ -20,7 +20,7 @@ def get_employees():
 def get_employee(employee_id):
     employee = db.session.get(EmployeeModel_v2, employee_id)
     if employee is None:
-        abort(404, "Animal not found")
+        abort(404, "Employee not found")
     return employee
 
 
@@ -47,7 +47,7 @@ def create_employee(employee_data):
 def update_employee(employee_data, employee_id):
     employee = db.session.get(EmployeeModel_v2, employee_id)
     if employee is None:
-        abort(404, "Animal not found")
+        abort(404, "Employee not found")
     EmployeeModel_v2.query.filter_by(id=employee_id).update(employee_data)
     db.session.commit()
     return employee
@@ -58,7 +58,7 @@ def update_employee(employee_data, employee_id):
 def delete_employee(employee_id):
     employee = db.session.get(EmployeeModel_v2, employee_id)
     if employee is None:
-        abort(404, "Animal not found")
+        abort(404, "Employee not found")
     db.session.delete(employee)
     db.session.commit()
-    return {"message": "Animal deleted"}
+    return {"message": "Employee deleted"}
