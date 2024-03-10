@@ -1,6 +1,5 @@
 import pytest
 from app import create_app
-from flask import Flask
 from resources.animal_v2 import blp
 from db import db
 
